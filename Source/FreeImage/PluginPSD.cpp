@@ -102,7 +102,7 @@ SupportsICCProfiles() {
 static BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
-} 
+}
 
 // ----------------------------------------------------------
 
@@ -115,7 +115,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 		psdParser parser;
 
 		FIBITMAP *dib = parser.Load(io, handle, s_format_id, flags);
-		
+
 		return dib;
 
 	} catch(const char *text) {
@@ -127,13 +127,13 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 static BOOL DLL_CALLCONV
 Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void *data) {
 	if(!handle) {
-		return NULL;
+		return FALSE;
 	}
 	try {
 		psdParser parser;
 
 		bool b = parser.Save(io, dib, handle, page, flags, data);
-		
+
 		return b;
 
 	} catch(const char *text) {
@@ -165,5 +165,5 @@ InitPSD(Plugin *plugin, int format_id) {
 	plugin->supports_export_bpp_proc = SupportsExportDepth;
 	plugin->supports_export_type_proc = SupportsExportType;
 	plugin->supports_icc_profiles_proc = SupportsICCProfiles;
-	plugin->supports_no_pixels_proc = SupportsNoPixels; 
+	plugin->supports_no_pixels_proc = SupportsNoPixels;
 }
